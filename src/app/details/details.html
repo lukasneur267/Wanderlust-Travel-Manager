@@ -1,0 +1,27 @@
+<!-- if the id in the URL is included in the array-->
+@if (destination) {
+  <div class="container">
+    <div class="row my-5">
+      <div class="col">
+        <img
+          [src]="'/images/' + destination.image"
+          class="img-fluid w-100"
+          alt="{{ destination.name }}"
+        />
+      </div>
+      <div class="col">
+        <h1>{{ destination.name }}</h1>
+
+        <p>{{ destination.description }}</p>
+        <br />
+        <p><strong>Population:</strong> {{ destination.population }}</p>
+        <p><strong>Best months to visit:</strong> {{ destination.bestMonths }}</p>
+        <p><strong>Price:</strong> {{ formatPrice(destination.price) }}</p>
+        <a class="btn btn-primary my-3" (click)="addToBookings(destination)">Add to Bookings</a>
+      </div>
+    </div>
+  </div>
+} @else {
+  <h2>Destination not found!</h2>
+  <p>Please return to home and try again.</p>
+}

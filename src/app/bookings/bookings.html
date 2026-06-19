@@ -1,0 +1,46 @@
+<div class="container my-4">
+  <h2>Your Booking Overview</h2>
+
+  @if (bookingItems.length > 0) {
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Destination</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of bookingItems; track item.id) {
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ formatPrice(item.price) }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ formatPrice(item.price * item.quantity) }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm">Remove</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="text-end">
+      <p>Subtotal: {{ formatPrice(subTotal) }}</p>
+      <p class="text-secondary">Service Fee (10 %) {{ formatPrice(subTotal * 0.1) }}</p>
+      <hr />
+      <h5>Total: {{ formatPrice(total) }}</h5>
+      @if (subTotal + subTotal * 0.1 > 1000) {
+        <p class="text-secondary">Discount (15 %): - {{ formatPrice(discount) }}</p>
+        <hr />
+        <h4>Final Price: {{ formatPrice(finalPrice) }}</h4>
+      }
+    </div>
+  } @else {
+    <p>
+      You don't have any bookings! Check out the destinations page and find your next adventure.
+    </p>
+  }
+</div>
