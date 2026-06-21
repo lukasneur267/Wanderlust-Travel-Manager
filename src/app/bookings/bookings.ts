@@ -1,26 +1,24 @@
 import { Component } from '@angular/core';
 import { IDestination } from '../idestination.interface';
 import { BookingsService } from '../bookings-service';
+import { RouterLink } from '@angular/router';
+import { IPrices } from '../iprices.interface';
 
 @Component({
   selector: 'app-bookings',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './bookings.html',
   styleUrl: './bookings.css',
 })
 export class Bookings {
   bookingItems: IDestination[] = [];
-  subTotal: number = 0;
-  serviceFee: number = 0.1; // 10 %
-  total: number = 0;
-  discount: number = 0.15; // 15 %
-  finalPrice: number = 0;
-
-  // // format to currency
-  // currencyFormatter = new Intl.NumberFormat('de-AT', {
-  //   style: 'currency',
-  //   currency: 'EUR',
-  // });
+  prices: IPrices = {
+    subTotal: 0,
+    serviceFee: 0,
+    total: 0,
+    discount: 0,
+    finalPrice: 0,
+  };
 
   constructor(private bS: BookingsService) {
     this.loadBookings();
@@ -31,11 +29,20 @@ export class Bookings {
     this.bookingItems = this.bS.getBookingItems();
   }
 
+  deleteBookingItem(item: IDestination) {
+    this.bS.removeFromBookings(item);
+    this.loadBookings();
+    this.showPrice();
+  }
+
   showPrice() {
-    this.subTotal = this.bS.calculateSubtotal();
-    this.total = this.subTotal + this.subTotal * this.serviceFee;
-    this.discount = this.total * this.discount;
-    this.finalPrice = this.total - this.discount;
+    // calculate the prices with the bookings service and update the local prices object with the new values
+    const prices = this.bS.calculatePrices();
+    this.prices.subTotal = prices.subTotal;
+    this.prices.serviceFee = prices.serviceFee;
+    this.prices.total = prices.total;
+    this.prices.discount = prices.discount;
+    this.prices.finalPrice = prices.finalPrice;
   }
 
   formatPrice(value: number): string {

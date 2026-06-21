@@ -1,0 +1,16 @@
+/* styling the welcome section */
+.hero-img {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-image.jpg');
+  height: 85vh;
+  /* scale to fit and center the image vertically */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-text {
+  margin: 0 auto;
+  padding: 10rem 1rem;
+  text-align: center;
+  color: white;
+}

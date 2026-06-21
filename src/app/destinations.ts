@@ -19,7 +19,7 @@ export const DESTINATIONS: IDestination[] = [
     name: 'Paris',
     image: 'paris.jpg',
     description:
-      'The City of Light, known for its iconic Eiffel Tower, charming cafés, and world-class art museums.',
+      'The City of Love, known for its iconic Eiffel Tower, charming cafés, and world-class art museums.',
     population: 2161000,
     bestMonths: 'April-June, September-October',
     price: 800,

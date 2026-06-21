@@ -21,26 +21,32 @@
             <td>{{ item.quantity }}</td>
             <td>{{ formatPrice(item.price * item.quantity) }}</td>
             <td>
-              <button class="btn btn-danger btn-sm">Remove</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteBookingItem(item)">
+                Remove
+              </button>
             </td>
           </tr>
         }
       </tbody>
     </table>
     <div class="text-end">
-      <p>Subtotal: {{ formatPrice(subTotal) }}</p>
-      <p class="text-secondary">Service Fee (10 %) {{ formatPrice(subTotal * 0.1) }}</p>
+      <p>Subtotal: {{ formatPrice(prices.subTotal) }}</p>
+      <p class="text-secondary">Service Fee (10 %) {{ formatPrice(prices.subTotal * 0.1) }}</p>
       <hr />
-      <h5>Total: {{ formatPrice(total) }}</h5>
-      @if (subTotal + subTotal * 0.1 > 1000) {
-        <p class="text-secondary">Discount (15 %): - {{ formatPrice(discount) }}</p>
+      <h5>Total: {{ formatPrice(prices.total) }}</h5>
+      @if (prices.subTotal + prices.subTotal * 0.1 > 1000) {
+        <p class="text-secondary">Discount (15 %): - {{ formatPrice(prices.discount) }}</p>
         <hr />
-        <h4>Final Price: {{ formatPrice(finalPrice) }}</h4>
+        <h4>Final Price: {{ formatPrice(prices.finalPrice) }}</h4>
       }
     </div>
   } @else {
-    <p>
-      You don't have any bookings! Check out the destinations page and find your next adventure.
-    </p>
+    <div class="my-3">
+      <p>You don't have any bookings!</p>
+      <p>Check out the destinations page and find your next adventure.</p>
+      <a class="nav-link" routerLink="/destinations" class="btn btn-warning me-3"
+        >Explore Destinations</a
+      >
+    </div>
   }
 </div>

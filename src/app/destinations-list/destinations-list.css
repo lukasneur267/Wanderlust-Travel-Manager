@@ -3,3 +3,7 @@
   height: 200px;
   object-fit: cover;
 }
+
+.unavailable {
+  opacity: 0.5;
+}
